@@ -45,7 +45,7 @@ def share_headlines():
     return statement(headline_msg)
 
 
-@ask.intent"NoIntent")
+@ask.intent("NoIntent")
 def no_intent():
     bye_text = "Na gut, dann halt nicht!"
     return statement(bye_text)
