@@ -2,11 +2,10 @@ from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 import urllib.request
 from bs4 import BeautifulSoup
-import re
 
 
 app = Flask(__name__)
-ask = Ask(app, "/handelblatt")
+ask = Ask(app, "/")
 
 
 def get_headlines():
@@ -18,19 +17,16 @@ def get_headlines():
     description = data.find_all('description', limit=7)
     del description[0:1]
     news = [j for i in zip(headlines, description) for j in i]
+    news = '...'.join(str(x) for x in news)
+    news = news.replace("<title>", "")
+    news = news.replace("</title>", "")
+    news = news.replace("<description>", "")
+    news = news.replace("</description>", "")
+
+
     return news
 
-data = get_headlines()
-print(data)
 
-"""Titel
- <title>Regierungsbildung: S\xc3\xb6der in 13-k\xc3\xb6pfiger CSU-Delegation f\xc3\xbcr Berliner Sondierungen</title>\n
-Erläuternung
-<description>Die Entscheidung naht: Am heutigen Donnerstag finden in Katalonien die Parlamentswahlen statt. Die Anleger rechnen mit einer Niederlage der Separatisten und decken sich deshalb mit spanischen Staatsanleihen ein.</description>\n
-"""
-
-
-"""
 @app.route('/')
 def homepage():
     return "hi there"
@@ -49,7 +45,7 @@ def share_headlines():
     return statement(headline_msg)
 
 
-@ask.intend("NoIntent")
+@ask.intent"NoIntent")
 def no_intent():
     bye_text = "Na gut, dann halt nicht!"
     return statement(bye_text)
@@ -58,4 +54,4 @@ def no_intent():
 if __name__ == '__main__':
     app.run(debug=True)
 
-"""
+
