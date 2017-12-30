@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
-ask = Ask(app, "/")
+ask = Ask(app, "/handelsblatt")
 
 
 def get_headlines():
