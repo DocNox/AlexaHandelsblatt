@@ -22,8 +22,6 @@ def get_headlines():
     news = news.replace("</title>", "")
     news = news.replace("<description>", "")
     news = news.replace("</description>", "")
-
-
     return news
 
 
