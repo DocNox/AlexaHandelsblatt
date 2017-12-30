@@ -41,7 +41,7 @@ def start_skill():
 @ask.intent("YesIntent")
 def share_headlines():
     headlines = get_headlines()
-    headline_msg = 'Die derzeitigen Nachrichten auf Handelsblatt{}'.format(headlines)
+    headline_msg = 'Die derzeitigen Nachrichten{}'.format(headlines)
     return statement(headline_msg)
 
 
